@@ -63,6 +63,12 @@ function habilitarLogin() {
     var formLogin = document.getElementById("formLogin");
 
     if (formLogin != null) {
+
+        var sessaoUsuarioLogado = GetUsuarioLogado();
+        if (sessaoUsuarioLogado != null) {
+            window.location.href = "/Home/Conversacao";
+        }
+
         var btnAcessar = document.getElementById("btnAcessar").addEventListener("click", function () {
             var email = document.getElementById("email").value;
             var senha = document.getElementById("senha").value;
@@ -91,4 +97,15 @@ function GetUsuarioLogado() {
 
 function SetUsuarioLogado(usuarioLogado) {
     sessionStorage.setItem("Logado", JSON.stringify(usuarioLogado));
+}
+
+//Página de conversação
+var telaConversacao = document.getElementById("paginaConversacao");
+
+if (telaConversacao != null) {
+    var usuarioLogado = GetUsuarioLogado();
+
+    if (usuarioLogado == null) {
+        window.location.href = "/Home/Login";
+    }
 }
