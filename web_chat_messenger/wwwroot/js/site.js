@@ -7,6 +7,7 @@ function connectionStart() {
     connection.start().then(function () {
         habilitarCadastro();
         habilitarLogin();
+        habilitarConversacao();
 
         console.info("SignalR conectado!");
     }).catch(function (erro) {
@@ -91,6 +92,25 @@ function habilitarLogin() {
     });
 }
 
+//Página de conversação
+function habilitarConversacao() {
+    var telaConversacao = document.getElementById("paginaConversacao");
+
+    if (telaConversacao != null) {
+        var usuarioLogado = GetUsuarioLogado();
+        if (usuarioLogado == null) {
+            window.location.href = "/Home/Login";
+        }
+
+        var btnSair = document.getElementById("btnSair");
+        btnSair.addEventListener("click", function () {
+            DeleteUsuarioLogado();
+            window.location.href = "/Home/Login";
+        });
+    }
+}
+
+//Funções globais
 function GetUsuarioLogado() {
     return JSON.parse(sessionStorage.getItem("Logado"));
 }
@@ -99,13 +119,6 @@ function SetUsuarioLogado(usuarioLogado) {
     sessionStorage.setItem("Logado", JSON.stringify(usuarioLogado));
 }
 
-//Página de conversação
-var telaConversacao = document.getElementById("paginaConversacao");
-
-if (telaConversacao != null) {
-    var usuarioLogado = GetUsuarioLogado();
-
-    if (usuarioLogado == null) {
-        window.location.href = "/Home/Login";
-    }
+function DeleteUsuarioLogado() {
+    sessionStorage.removeItem("Logado");
 }
