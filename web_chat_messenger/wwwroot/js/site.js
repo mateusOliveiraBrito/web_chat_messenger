@@ -160,7 +160,8 @@ function enviarEReceberMensagem() {
 
         var mensagem = document.getElementById("mensagem").value;
 
-        connection.invoke("EnviarMensagem", mensagem, nomeGrupo);
+        var usuarioLogado = GetUsuarioLogado();
+        connection.invoke("EnviarMensagem", usuarioLogado, mensagem, nomeGrupo);
     });
 }
 
