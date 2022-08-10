@@ -109,6 +109,7 @@ function habilitarConversacao() {
         gerenciarListaDeUsuarios();
         enviarEReceberMensagem();
         abrirGrupo();
+        OfflineObserver();
     }
 }
 
@@ -192,6 +193,12 @@ function abrirGrupo() {
         }
 
         document.querySelector(".container-button").style.display = "flex";
+    });
+}
+
+function OfflineObserver() {
+    window.addEventListener("beforeunload", function () {
+        connection.invoke("RemoverConnectionIdDoUsuario", GetUsuarioLogado());
     });
 }
 
