@@ -177,10 +177,19 @@ function enviarEReceberMensagem() {
 }
 
 function abrirGrupo() {
-    connection.on("AbrirGrupo", function (nomeDoGrupo) {
+    connection.on("AbrirGrupo", function (nomeDoGrupo, mensagens) {
         nomeGrupo = nomeDoGrupo;
         var containerMensagem = document.querySelector(".container-messages");
         containerMensagem.innerHTML = "";
+
+        if (nomeGrupo == nomeDoGrupo) {
+            var htmlMensagem = "";
+            for (i = 0; i < mensagens.length; i++) {
+                htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagens[i].usuario.id ? 'right' : 'left') + '"><div class="message-head"><img src="~/imagem/chat.png" />' + mensagens[i].usuario.nome + '</div><div class="message-message">' + mensagens[i].texto + '</div></div>';
+            }
+
+            containerMensagem.innerHTML += htmlMensagem;
+        }
     });
 }
 
