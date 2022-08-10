@@ -70,13 +70,17 @@ function habilitarLogin() {
             window.location.href = "/Home/Conversacao";
         }
 
-        var btnAcessar = document.getElementById("btnAcessar").addEventListener("click", function () {
+        document.getElementById("btnAcessar").addEventListener("click", function () {
             var email = document.getElementById("email").value;
             var senha = document.getElementById("senha").value;
 
             var usuario = { Email: email, Senha: senha };
 
             connection.invoke("RealizarLogin", usuario);
+        });
+
+        document.getElementById("btnCadastrar").addEventListener("click", function () {
+            window.location.href = "/Home/Cadastro";
         });
     }
 
@@ -97,17 +101,30 @@ function habilitarConversacao() {
     var telaConversacao = document.getElementById("paginaConversacao");
 
     if (telaConversacao != null) {
-        var usuarioLogado = GetUsuarioLogado();
-        if (usuarioLogado == null) {
-            window.location.href = "/Home/Login";
-        }
+        gerenciarConnectionIds();
+        gerenciarListaDeUsuarios();
+    }
+}
 
-        var btnSair = document.getElementById("btnSair");
-        btnSair.addEventListener("click", function () {
+function gerenciarConnectionIds() {
+    var usuarioLogado = GetUsuarioLogado();
+    if (usuarioLogado == null) {
+        window.location.href = "/Home/Login";
+    }
+
+    connection.invoke("AdicionarConnectionIdDoUsuario", GetUsuarioLogado());
+
+    var btnSair = document.getElementById("btnSair");
+    btnSair.addEventListener("click", function () {
+        connection.invoke("RemoverConnectionIdDoUsuario", GetUsuarioLogado()).then(function () {
             DeleteUsuarioLogado();
             window.location.href = "/Home/Login";
         });
-    }
+    });
+}
+
+function gerenciarListaDeUsuarios() {
+    connection.invoke("ObterListaDeUsuarios");
 }
 
 //Funções globais
