@@ -131,13 +131,21 @@ function gerenciarListaDeUsuarios() {
 
         for (i = 0; i < usuarios.length; i++) {
             if (GetUsuarioLogado().id != usuarios[i].id) {
-                html += '<div class="container-user-item"><img src="/imagem/logo.png" style="width:20%;" /><div><span>' + usuarios[i].nome.split(" ")[0] + ' ' + usuarios[i].nome.split(" ")[1] + '<br/></span>' + '<span>' + (usuarios[i].isOnline ? 'Online' : 'Offline') + '</span><br/><span class="email">' + usuarios[i].email + '</span></div></div>';
+                html += '<div class="container-user-item"><img src="/imagem/logo.png" style="width:20%;" /><div><span>' + usuarios[i].nome.split(" ")[0] + ' ' + (usuarios[i].nome.split(" ")[1] == null ? ' ' : usuarios[i].nome.split(" ")[1]) + '</span><br/>' + '<span>' + (usuarios[i].isOnline ? 'Online' : 'Offline') + '</span><br/><span class="email">' + usuarios[i].email + '</span></div></div>';
             }
         }
 
-        console.log(html);
-
         document.getElementById("users").innerHTML = html;
+
+        var containerUsuarios = document.getElementById("users").querySelectorAll(".container-user-item");
+        for (i = 0; i < containerUsuarios.length; i++) {
+            containerUsuarios[i].addEventListener("click", function (event) {
+
+                var componente = event.target || event.srcElement;
+
+                console.info(componente.parentElement.querySelector(".email").innerText);
+            });
+        }
     });
 }
 
