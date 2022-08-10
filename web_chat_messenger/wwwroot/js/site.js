@@ -125,10 +125,22 @@ function gerenciarConnectionIds() {
 
 function gerenciarListaDeUsuarios() {
     connection.invoke("ObterListaDeUsuarios");
+
+    connection.on("ReceberListaDeUsuarios", function (usuarios) {
+        var html = "";
+
+        for (i = 0; i < usuarios.length; i++) {
+            html += '<div class="container-user-item"><img src="/imagem/logo.png" style="width:20%;" /><div><span>' + usuarios[i].nome.split(" ")[0] + ' ' + usuarios[i].nome.split(" ")[1] + '<br/></span>' + '<span>' + (usuarios[i].isOnline ? 'Online' : 'Offline') + '</span><br/><span class="email">' + usuarios[i].email + '</span></div></div>';
+        }
+
+        console.log(html);
+
+        document.getElementById("users").innerHTML = html;
+    });
 }
 
 //Funções globais
-function GetUsuarioLogado() {
+function GetUsuarioLogado() { 
     return JSON.parse(sessionStorage.getItem("Logado"));
 }
 
