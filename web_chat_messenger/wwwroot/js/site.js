@@ -143,7 +143,10 @@ function gerenciarListaDeUsuarios() {
 
                 var componente = event.target || event.srcElement;
 
-                console.info(componente.parentElement.querySelector(".email").innerText);
+                var emailUsuarioLogado = GetUsuarioLogado().email;
+                var emailUsuarioSelecionado = componente.parentElement.querySelector(".email").innerText;
+
+                connection.invoke("CriarOuAbrirGrupo", emailUsuarioLogado, emailUsuarioSelecionado);
             });
         }
     });
