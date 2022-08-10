@@ -1,5 +1,6 @@
 ﻿//Conexão e reconexão com o Hub do SignalR
 var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
+var nomeGrupo = "";
 
 connectionStart();
 
@@ -103,6 +104,8 @@ function habilitarConversacao() {
     if (telaConversacao != null) {
         gerenciarConnectionIds();
         gerenciarListaDeUsuarios();
+        enviarEReceberMensagem();
+        abrirGrupo();
     }
 }
 
@@ -149,6 +152,21 @@ function gerenciarListaDeUsuarios() {
                 connection.invoke("CriarOuAbrirGrupo", emailUsuarioLogado, emailUsuarioSelecionado);
             });
         }
+    });
+}
+
+function enviarEReceberMensagem() {
+    document.getElementById("btnEnviar").addEventListener("click", function () {
+
+        var mensagem = document.getElementById("mensagem").value;
+
+        connection.invoke("EnviarMensagem", mensagem, nomeGrupo);
+    });
+}
+
+function abrirGrupo() {
+    connection.on("AbrirGrupo", function (nomeDoGrupo) {
+        nomeGrupo = nomeDoGrupo;
     });
 }
 
