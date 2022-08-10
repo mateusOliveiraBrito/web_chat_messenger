@@ -163,11 +163,21 @@ function enviarEReceberMensagem() {
         var usuarioLogado = GetUsuarioLogado();
         connection.invoke("EnviarMensagem", usuarioLogado, mensagem, nomeGrupo);
     });
+
+    connection.on("ReceberMensagem", function (mensagem, nomeDoGrupo) {
+        if (nomeGrupo == nomeDoGrupo) {
+            var containerMensagem = document.querySelector(".container-messages");
+            var htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '"><div class="message-head"><img src="~/imagem/chat.png" />' + mensagem.usuario.nome + '</div><div class="message-message">' + mensagem.texto + '</div></div>';
+            container.innerHTML += htmlMensagem;
+        }
+    });
 }
 
 function abrirGrupo() {
     connection.on("AbrirGrupo", function (nomeDoGrupo) {
         nomeGrupo = nomeDoGrupo;
+        var containerMensagem = document.querySelector(".container-messages");
+        containerMensagem.innerHTML = "";
     });
 }
 
