@@ -166,6 +166,8 @@ function enviarEReceberMensagem() {
 
         var usuarioLogado = GetUsuarioLogado();
         connection.invoke("EnviarMensagem", usuarioLogado, mensagem, nomeGrupo);
+
+        document.getElementById("mensagem").value = "";
     });
 
     connection.on("ReceberMensagem", function (mensagem, nomeDoGrupo) {
@@ -197,8 +199,9 @@ function abrirGrupo() {
 }
 
 function OfflineObserver() {
-    window.addEventListener("beforeunload", function () {
+    window.addEventListener("beforeunload", function (event) {
         connection.invoke("RemoverConnectionIdDoUsuario", GetUsuarioLogado());
+        event.returnValue = "Sua sessão será encerrada. Deseja sair mesmo assim?";
     });
 }
 
