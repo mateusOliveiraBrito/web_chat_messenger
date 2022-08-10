@@ -12,8 +12,11 @@ function connectionStart() {
 
         console.info("SignalR conectado!");
     }).catch(function (erro) {
-        console.info("Erro ao conectar com o SignalR: " + erro.toString());
-        setTimeout(connectionStart(), 5000);
+
+        if (connection.state == 0) {
+            console.info("Erro ao conectar com o SignalR: " + erro.toString());
+            setTimeout(connectionStart, 5000);
+        }
     });
 }
 
@@ -168,7 +171,7 @@ function enviarEReceberMensagem() {
         if (nomeGrupo == nomeDoGrupo) {
             var containerMensagem = document.querySelector(".container-messages");
             var htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '"><div class="message-head"><img src="~/imagem/chat.png" />' + mensagem.usuario.nome + '</div><div class="message-message">' + mensagem.texto + '</div></div>';
-            container.innerHTML += htmlMensagem;
+            containerMensagem.innerHTML += htmlMensagem;
         }
     });
 }
