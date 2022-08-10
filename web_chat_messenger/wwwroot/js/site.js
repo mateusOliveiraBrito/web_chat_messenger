@@ -1,5 +1,5 @@
 ﻿//Conexão e reconexão com o Hub do SignalR
-var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/").build();
 var nomeGrupo = "";
 
 connectionStart();
