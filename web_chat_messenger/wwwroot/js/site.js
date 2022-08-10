@@ -116,7 +116,7 @@ function gerenciarConnectionIds() {
 
     var btnSair = document.getElementById("btnSair");
     btnSair.addEventListener("click", function () {
-        connection.invoke("RemoverConnectionIdDoUsuario", GetUsuarioLogado()).then(function () {
+        connection.invoke("RealizarLogout", GetUsuarioLogado()).then(function () {
             DeleteUsuarioLogado();
             window.location.href = "/Home/Login";
         });
