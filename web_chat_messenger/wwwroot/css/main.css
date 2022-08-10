@@ -22,9 +22,9 @@ body {
 
 .container-button {
     width: 100%;
-    display: flex;
     flex-direction: row;
     justify-content: space-between;
+    display: none;
 }
 
 .container-logo {
@@ -139,12 +139,14 @@ input[type=button], .btn-send {
 
 .message-head {
     background-color: white;
+    font-size: 14px;
 }
 
 .message-message {
     margin-top: 15px;
     margin-bottom: 5px;
     color: #8C8C8C;
+    font-size: 18px;
 }
 
 /* --- SideBar --- > https://www.w3schools.com/howto/howto_css_fixed_sidebar.asp*/
