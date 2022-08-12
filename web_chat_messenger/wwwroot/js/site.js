@@ -1,9 +1,9 @@
 ﻿//Conexão e reconexão com o Hub do SignalR
 //URL produção
-//var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
 
 //URL local
-var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
+//var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
 
 var nomeGrupo = "";
 
@@ -199,6 +199,7 @@ function enviarEReceberMensagem() {
             var containerMensagem = document.querySelector(".container-messages");
             var htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '"><div class="message-head-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '">' + mensagem.usuario.nome + '</div><div class="message-message">' + mensagem.texto + '</div></div>';
             containerMensagem.innerHTML += htmlMensagem;
+            containerMensagem.scrollTop = containerMensagem.scrollHeight;
         }
     });
 }
@@ -216,6 +217,7 @@ function abrirGrupo() {
             }
 
             containerMensagem.innerHTML += htmlMensagem;
+            containerMensagem.scrollTop = containerMensagem.scrollHeight;
         }
 
         document.querySelector(".container-button").style.display = "flex";
