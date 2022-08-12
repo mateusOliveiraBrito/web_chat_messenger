@@ -173,7 +173,7 @@ function enviarEReceberMensagem() {
     connection.on("ReceberMensagem", function (mensagem, nomeDoGrupo) {
         if (nomeGrupo == nomeDoGrupo) {
             var containerMensagem = document.querySelector(".container-messages");
-            var htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '"><div class="message-head"><img src="/imagem/chat.png" /> ' + mensagem.usuario.nome + '</div><div class="message-message">' + mensagem.texto + '</div></div>';
+            var htmlMensagem = '<div class="message message-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '"><div class="message-head-' + (GetUsuarioLogado().id == mensagem.usuario.id ? 'right' : 'left') + '">' + mensagem.usuario.nome + '</div><div class="message-message">' + mensagem.texto + '</div></div>';
             containerMensagem.innerHTML += htmlMensagem;
         }
     });
@@ -188,7 +188,7 @@ function abrirGrupo() {
         if (nomeGrupo == nomeDoGrupo) {
             var htmlMensagem = "";
             for (i = 0; i < mensagens.length; i++) {
-                htmlMensagem += '<div class="message message-' + (GetUsuarioLogado().id == mensagens[i].usuario.id ? 'right' : 'left') + '"><div class="message-head"><img src="/imagem/chat.png" /> ' + mensagens[i].usuario.nome + '</div><div class="message-message">' + mensagens[i].texto + '</div></div>';
+                htmlMensagem += '<div class="message message-' + (GetUsuarioLogado().id == mensagens[i].usuario.id ? 'right' : 'left') + '"><div class="message-head-' + (GetUsuarioLogado().id == mensagens[i].usuario.id ? 'right' : 'left') + '">' + mensagens[i].usuario.nome + '</div><div class="message-message">' + mensagens[i].texto + '</div></div>';
             }
 
             containerMensagem.innerHTML += htmlMensagem;

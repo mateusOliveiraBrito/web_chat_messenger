@@ -119,34 +119,43 @@ input[type=button], .btn-send {
 .message {
     width: 65%;
     margin: 15px;
-    background-color: white;
     padding: 15px 20px;
     border-radius: 15px;
-    border: .5px solid #F2F2F2;
-    -webkit-box-shadow: 0px 4px 17px 0px rgba(219,219,219,1);
-    -moz-box-shadow: 0px 4px 17px 0px rgba(219,219,219,1);
-    box-shadow: 0px 4px 17px 0px rgba(219,219,219,1);
+    -webkit-box-shadow: 0px 4px 17px 0px rgba(82, 78, 183, 1);
+    -moz-box-shadow: 0px 4px 17px 0px rgba(82, 78, 183, 1);
+    box-shadow: 0px 4px 17px 0px rgba(82, 78, 183, 1);
 }
 
 .message-left {
     float: left;
     text-align: start;
+    background-color: #E72AA8;
+    border: .5px solid #E72AA8;
 }
 
 .message-right {
     float: right;
     text-align: end;
+    background-color: #0287E6;
+    border: .5px solid #0287E6;
 }
 
-.message-head {
-    background-color: white;
+.message-head-left {
+    background-color: #E72AA8;
+    color: #FFF;
+    font-size: 14px;
+}
+
+.message-head-right {
+    background-color: #0287E6;
+    color: #FFF;
     font-size: 14px;
 }
 
 .message-message {
     margin-top: 15px;
     margin-bottom: 5px;
-    color: #8C8C8C;
+    color: #FFF;
     font-size: 18px;
 }
 
