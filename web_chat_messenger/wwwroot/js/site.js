@@ -1,5 +1,10 @@
 ﻿//Conexão e reconexão com o Hub do SignalR
-var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
+//URL produção
+//var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
+
+//URL local
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
+
 var nomeGrupo = "";
 
 connectionStart();
@@ -164,10 +169,29 @@ function enviarEReceberMensagem() {
 
         var mensagem = document.getElementById("mensagem").value;
 
+        if (isEmptyOrSpaces(mensagem)) {
+            return;
+        }
+
         var usuarioLogado = GetUsuarioLogado();
         connection.invoke("EnviarMensagem", usuarioLogado, mensagem, nomeGrupo);
 
         document.getElementById("mensagem").value = "";
+    });
+
+    document.getElementById("mensagem").addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            var mensagem = document.getElementById("mensagem").value;
+
+            if (isEmptyOrSpaces(mensagem)) {
+                return;
+            }
+
+            var usuarioLogado = GetUsuarioLogado();
+            connection.invoke("EnviarMensagem", usuarioLogado, mensagem, nomeGrupo);
+
+            document.getElementById("mensagem").value = "";
+        }
     });
 
     connection.on("ReceberMensagem", function (mensagem, nomeDoGrupo) {
@@ -216,4 +240,8 @@ function SetUsuarioLogado(usuarioLogado) {
 
 function DeleteUsuarioLogado() {
     sessionStorage.removeItem("Logado");
+}
+
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null || str === "";
 }
