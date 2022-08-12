@@ -1,9 +1,9 @@
 ﻿//Conexão e reconexão com o Hub do SignalR
 //URL produção
-var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
+//var connection = new signalR.HubConnectionBuilder().withUrl("https://chatmessengerwebapi.azurewebsites.net/ChatMessengerHub").build();
 
 //URL local
-//var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:5001/ChatMessengerHub").build();
 
 var nomeGrupo = "";
 
@@ -221,6 +221,7 @@ function abrirGrupo() {
         }
 
         document.querySelector(".container-button").style.display = "flex";
+        document.getElementById("mensagem").focus();
     });
 }
 
